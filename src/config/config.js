@@ -23,4 +23,10 @@ config.bvg = {
     recordsToFetch : 5
 };
 
+config.telegram = {
+  apiUrl: 'https://api.telegram.org/bot',
+  apiToken: '188260325:AAGzMOuL9ZEzkc7wQUpeC5eqMw3dW_Q1aH8'
+}; 
+
+
 module.exports = config;
