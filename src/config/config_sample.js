@@ -4,15 +4,11 @@
 var config = {};
 
 config.weather = {
-    apiKey: '67eaa21c69df0a3c424c0614362fa66b',
+    apiKey: 'YOUR_API_KEY HERE',
     city: 'Berlin',
     hostUrl: 'http://api.openweathermap.org/data/2.5/weather?&q=',
     imageUrl: 'http://openweathermap.org/img/w/',
     refreshInterval : 1000*60*1
-
-};
-
-config.news ={
 
 };
 
@@ -25,8 +21,8 @@ config.bvg = {
 
 config.telegram = {
   apiUrl: 'https://api.telegram.org/bot',
-  apiToken: '188260325:AAGzMOuL9ZEzkc7wQUpeC5eqMw3dW_Q1aH8'
-}; 
+  apiToken: 'YOUR_API_KEY HERE'
+};
 
 
 module.exports = config;
