@@ -17,7 +17,7 @@ function bot(){
     var defer = q.defer();
 
     bvg.getSchedule(stationName).then(function(result){
-      var messageData = "";
+      var messageData = "*Arrivals/departures @ " + stationName +"* \n";
       console.log(result);
         if(result.length == 0){
             messageData += "I can't find the station you are looking for, check the spelling and try again";
@@ -25,8 +25,9 @@ function bot(){
 
         result.forEach(function(item){
           messageData += item.departure;
-          messageData += item.direction;
           messageData += item.line;
+          messageData += item.direction;
+          messageData += '---------------------- \n'
         });
 
         console.log(messageData);

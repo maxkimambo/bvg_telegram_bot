@@ -32,11 +32,12 @@ bvg.prototype.getSchedule = function(stationName){
 
               var current = rows[i];
               console.log(current);
+
               if (current){
+
               scheduleItem.departure = $(current).children().first().text().replace('*', '');
               scheduleItem.line = $(current).children().eq(1).text();
               scheduleItem.direction = $(current).children().last().text();
-
 
               scheduleData[i] = scheduleItem;
             }
@@ -47,6 +48,5 @@ bvg.prototype.getSchedule = function(stationName){
 
     return defer.promise;
 };
-
 
 module.exports = bvg;
