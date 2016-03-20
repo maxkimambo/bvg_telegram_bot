@@ -1,10 +1,17 @@
 var bvg = require('./bvg');
 var telegram = require('./telegram')();
+var bot = require('./bot')();
+
 var _ = require('underscore');
 var lastUpdateId = 0;
 
+function errorHandler(err){
+  console.error(err);
+}
+
 function poll(offset){
-  telegram.getUpdates(offset).then(function(messages){
+
+   telegram.getUpdates(offset).then(function(messages){
 
       if (messages.result.length > 0){
         var result = messages.result;
@@ -14,12 +21,24 @@ function poll(offset){
           var chatId = item.message.chat.id;
           var messageId = item.message.message_id;
           // reply_to_message_id: messageId
-          var message = {
-            chat_id: chatId,
-            text: "Some say .. I am a bot m#$%$ker"
 
-          }
-            lastUpdateId = item.update_id;
+          var command =  bot.parseMessage(item.message.text);
+
+          // execute the resulting command
+          // send the output as a message to the user.
+
+          command().then(function(result){
+            var message = {
+              chat_id: chatId,
+              text: "Some say .. I am a bot m#$%$ker "  + result
+
+            }
+
+              telegram.sendMessage(message);
+
+          }, errorHandler);
+
+          lastUpdateId = item.update_id;
 
         });
       }

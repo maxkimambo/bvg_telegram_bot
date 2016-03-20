@@ -1,10 +1,9 @@
 var client = require('./../httpClient');
 var config = require('./../config/config');
 
-
 var q = require('q');
-
 var httpClient = new client();
+
 
 function telegram(){
 
