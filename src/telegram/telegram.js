@@ -27,13 +27,17 @@ function telegram(){
   *
   */
   function getUpdates(offset){
+      console.log('offset is %s',offset);
 
       var command = endpoint + '/getupdates';
 
       // if offset specified use that
       if(offset){
+        // increment offset so that we only fetch the next unseen message
+        offset ++; 
         command +='?offset='+offset;
       }
+      console.log(command);
       var deferred = q.defer();
 
       console.log('checking for new messages ... ');

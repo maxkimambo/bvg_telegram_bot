@@ -1,8 +1,11 @@
 var bvg = require('./bvg');
 var telegram = require('./telegram')();
+var _ = require('underscore');
 
 
-function poll(){
+var lastUpdateId = 0;
+
+function poll(offset){
 
   // var b = new bvg();
   // b.getSchedule('loeperplatz').then(function(res){
@@ -10,24 +13,30 @@ function poll(){
   // });
 
   telegram.getMe();
-  telegram.getUpdates().then(function(messages){
-    console.log(messages);
+  telegram.getUpdates(offset).then(function(messages){
+      // console.log(messages);
+      // console.log(messages.result);
+
       if (messages.result.length > 0){
         var result = messages.result;
 
         result.forEach(function(item){
-          console.log(item.message);
-          console.log(item.message.chat.id);
+
+          // console.log(item.message.chat.id);
+
           var chatId = item.message.chat.id;
           var messageId = item.message.message_id;
+
+          console.log(messageId);
 // reply_to_message_id: messageId
           var message = {
             chat_id: chatId,
-            text: "Some say .. "
+            text: "Some say .. I am a bot m#$%$ker"
 
           }
-
-          //telegram.sendMessage(message);
+            lastUpdateId = item.update_id;
+            //
+          telegram.sendMessage(message);
 
         });
       }
@@ -35,5 +44,8 @@ function poll(){
 
 }
 
-poll();
-// setInterval(poll, 10000);
+setInterval(function(){
+
+  console.log('last udpate id %s', lastUpdateId);
+  poll(lastUpdateId);
+}, 10000);
