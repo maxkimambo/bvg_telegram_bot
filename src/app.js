@@ -4,13 +4,6 @@ var _ = require('underscore');
 var lastUpdateId = 0;
 
 function poll(offset){
-
-  // var b = new bvg();
-  // b.getSchedule('loeperplatz').then(function(res){
-  //    console.log(res);
-  // });
-
-  telegram.getMe();
   telegram.getUpdates(offset).then(function(messages){
 
       if (messages.result.length > 0){
