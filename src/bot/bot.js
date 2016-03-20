@@ -1,5 +1,7 @@
 var S = require('string');
 var q = require('q');
+var bvgClient = require('./../bvg');
+var bvg = new bvgClient();
 
 
 function bot(){
@@ -14,9 +16,27 @@ function bot(){
 
     var defer = q.defer();
 
-    defer.resolve('Station info :)');
+    bvg.getSchedule(stationName).then(function(result){
+      var messageData = "";
+      console.log(result);
+        if(result.length == 0){
+            messageData += "I can't find the station you are looking for, check the spelling and try again";
+        }
+
+        result.forEach(function(item){
+          messageData += item.departure;
+          messageData += item.direction;
+          messageData += item.line;
+        });
+
+        console.log(messageData);
+
+
+        defer.resolve(messageData);
+    });
 
     return defer.promise;
+
   }
 
   function getTripInfo(stationName){

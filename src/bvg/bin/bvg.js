@@ -25,16 +25,23 @@ bvg.prototype.getSchedule = function(stationName){
 
         var rows = $('table>tbody').find('tr');
 
+
+
         for (var i =0; i < config.bvg.recordsToFetch; i++){
             var scheduleItem = {};
-            var current = rows[i];
 
-            scheduleItem.departure = $(current).children().first().text().replace('*', '');
-            scheduleItem.line = $(current).children().eq(1).text();
-            scheduleItem.direction = $(current).children().last().text();
+              var current = rows[i];
+              console.log(current);
+              if (current){
+              scheduleItem.departure = $(current).children().first().text().replace('*', '');
+              scheduleItem.line = $(current).children().eq(1).text();
+              scheduleItem.direction = $(current).children().last().text();
 
-            scheduleData[i] = scheduleItem;
+
+              scheduleData[i] = scheduleItem;
+            }
         }
+
        defer.resolve(scheduleData);
     });
 
