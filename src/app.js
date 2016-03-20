@@ -22,14 +22,15 @@ function poll(offset){
           var messageId = item.message.message_id;
           // reply_to_message_id: messageId
 
-          var command =  bot.parseMessage(item.message.text);
+          var command = bot.parseMessage(item.message.text);
 
           // execute the resulting command
           // send the output as a message to the user.
 
-          command().then(function(result){
+          command.then(function(result){
             var message = {
               chat_id: chatId,
+              parse_mode: 'Markdown',
               text: "Some say .. I am a bot m#$%$ker "  + result
 
             }
