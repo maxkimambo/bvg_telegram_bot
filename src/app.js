@@ -1,10 +1,7 @@
-var bvg = require('./bvg');
 var telegram = require('./telegram')();
 var bot = require('./bot')();
 
-var sch = new bvg();
 
-var _ = require('underscore');
 var lastUpdateId = 0;
 
 function errorHandler(err){
@@ -34,7 +31,6 @@ function poll(offset){
               chat_id: chatId,
               parse_mode: 'Markdown',
               text: result
-
             }
 
               telegram.sendMessage(message);
@@ -52,11 +48,3 @@ function poll(offset){
 setInterval(function(){
   poll(lastUpdateId);
 }, 10000);
-
-// function getStationInfo(){
-//   sch.getSchedule('loeperplatz').then(function(result){
-//       console.log(result);
-//   });
-// }
-//
-// getStationInfo();

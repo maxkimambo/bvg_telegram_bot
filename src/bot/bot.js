@@ -1,7 +1,6 @@
 var S = require('string');
 var q = require('q');
-var bvgClient = require('./../bvg');
-var bvg = new bvgClient();
+var bvg = require('./../bvg');
 
 
 function bot(){
